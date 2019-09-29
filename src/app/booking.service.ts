@@ -11,12 +11,21 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  login(data): Observable<any> {
+  login(data): Observable< any > {
     const responseType = 'json';
     this.options = {
       responseType
     };
-    return this.http.post<any>(AppConfig.baseUrl + '/user/login', data, this.options)
+    return this.http.post(AppConfig.baseUrlV1 + '/user/login', data, this.options)
+    .pipe();
+  }
+
+  getPackages(): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.get(AppConfig.baseUrlV1 + '/package', this.options)
     .pipe();
   }
 }
