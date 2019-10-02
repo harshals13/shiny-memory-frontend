@@ -2,14 +2,14 @@
 
 <div style="margin-top: 200px">
     <nav class="navbar navbar-dark bg-primary">
-        <form class="form-inline">
+        <form [formGroup]="tripForm" class="form-inline" >
           <input class="form-control mr-sm-4" type="text" value="Bangalore" disabled='true' aria-label="Search">
-          <select class="form-control mr-sm-4">
+          <select class="form-control mr-sm-4" formControlName="packageName">
             <option *ngFor="let package of packages" [value]='package.packageName'>{{package.packageName}} - Rs.{{package.rate}}</option>
           </select>
           <input class="form-control mr-sm-4" type="date"  aria-label="Search">
         </form>
-        <button class="btn btn-success my-2 my-sm-0 pull-right" type="submit">Submit</button>
+        <button class="btn btn-success my-2 my-sm-0 pull-right" (click)="createTrip(tripForm.value)">Submit</button>
       </nav>
 </div>
 

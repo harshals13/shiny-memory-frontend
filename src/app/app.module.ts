@@ -10,13 +10,15 @@ import { MenuComponent } from './menu/menu.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     BookingComponent,
-    MenuComponent
+    MenuComponent,
+    ConfirmBookingComponent
   ],
   imports: [
     BrowserModule,

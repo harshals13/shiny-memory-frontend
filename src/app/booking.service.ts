@@ -20,12 +20,48 @@ export class BookingService {
     .pipe();
   }
 
+  createTrip(data): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.post(AppConfig.baseUrlV1 + '/trip', data, this.options)
+    .pipe();
+  }
+
   getPackages(): Observable< any > {
     const responseType = 'json';
     this.options = {
       responseType
     };
     return this.http.get(AppConfig.baseUrlV1 + '/package', this.options)
+    .pipe();
+  }
+
+  getTripDetailsOfUser(email): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.get(AppConfig.baseUrlV1 + `/trip?email=${email}`, this.options)
+    .pipe();
+  }
+
+  getDriverDetails(): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.get(AppConfig.baseUrlV1 + '/driver', this.options)
+    .pipe();
+  }
+
+  updateDriverToTrip(data): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.put(AppConfig.baseUrlV1 + '/trip', data, this.options)
     .pipe();
   }
 }

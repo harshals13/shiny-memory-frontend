@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { BookingService } from '../booking.service';
 })
 export class HomeComponent implements OnInit {
   packages = [];
-  constructor(private bookingService: BookingService) { }
+  constructor(private bookingService: BookingService, private router: Router) { }
   tripForm: FormGroup;
   ngOnInit() {
     this.getPackages();
@@ -24,7 +25,15 @@ export class HomeComponent implements OnInit {
       const data = {
         package: this.packages.find((travelPackage) => travelPackage.packageName === value.packageName),
         user: JSON.parse(localStorage.getItem('user')),
-      }
+        tripDate: value.tripDate,
+        rate: '1500',
+        isCompleted: false
+      };
+      this.bookingService.createTrip(data).subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/selectdriver']);
+        }
+      });
     }
   }
 
