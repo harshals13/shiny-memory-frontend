@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class BookingComponent implements OnInit {
   trip: any;
+  selectedDriver: any;
 
   constructor(private bookingService: BookingService, private router: Router) { }
   drivers = [];
@@ -41,18 +42,23 @@ export class BookingComponent implements OnInit {
     this.filteredDrivers = this.drivers.filter((driver) => driver.language === language);
   }
 
-  goToConfirmBooking(driver) {
-    console.log("Hello")
-    const data = {
-      _id: this.trip._id,
-      driver: driver
-    };
-    console.log(data);
-    this.bookingService.updateDriverToTrip(data).subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/confirmbooking']);
-      }
-    });
+  selectDriver(driver) {
+    this.selectedDriver = driver;
+  }
+
+  goToConfirmBooking() {
+    if (this.selectedDriver) {
+      const data = {
+        _id: this.trip._id,
+        driver: this.selectedDriver
+      };
+      console.log(data);
+      this.bookingService.updateDriverToTrip(data).subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/confirmbooking']);
+        }
+      });
+    }
   }
 
 }
