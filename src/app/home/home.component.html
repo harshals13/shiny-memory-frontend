@@ -4,7 +4,7 @@
     <nav class="navbar navbar-dark bg-primary">
         <form [formGroup]="tripForm" class="form-inline" >
           <input class="form-control mr-sm-4" type="text" value="Bangalore" disabled='true' aria-label="Search">
-          <select class="form-control mr-sm-4" formControlName="packageName">
+          <select class="form-control mr-sm-4" formControlName="packageName" placeholder="Select Package">
             <option *ngFor="let package of packages" [value]='package.packageName'>{{package.packageName}} - Rs.{{package.rate}}</option>
           </select>
           <input class="form-control mr-sm-4" type="date"  aria-label="Search">

@@ -1,23 +1,79 @@
 <app-menu></app-menu>
-<div class="card" style="width: 35rem;margin: auto; margin-top: 100px">
+<div class="card" style="width: 35rem;margin: auto; margin-top: 100px" *ngIf="!showBookingTicket">
     <div class="card-body">
       <h5 class="card-title">Confirm booking</h5>
+      <form [formGroup]="confirmBookingForm" (ngSubmit)="submitBookingConfirmation(confirmBookingForm.value)">
         <div>
-              <div class="form-group">
-                  <div class="form-group">
-                      <label for="exampleInputEmail1">Name</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                  </div>
-                  <div class="form-group">
-                      <label for="exampleInputEmail1">Number</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter number">
-                  </div>
-                  <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                  </div>
-
-                </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input type="email" formControlName="fullName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Mobile number</label>
+              <input type="email" formControlName="mobile" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter number">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="exampleInputEmail1">Pickup Address</label>
+                <textarea formControlName="pickUpAddress"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter address"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label for="exampleInputEmail1">Pickup Date and Time</label>
+                <input formControlName="pickUpTime" type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter date">
+            </div>
+          </div>
+          <div *ngIf="confirmBookingForm.invalid" class="text-danger">
+            Please fill all the fields before submitting
+          </div>
         </div>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary"  type="submit">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
+
+
+  <div class="card" style="width: 35rem;margin: auto; margin-top: 100px" *ngIf="showBookingTicket">
+      <div class="card-body">
+        <h2 class="card-title text-center">Confirmed - Booking Ticket</h2>
+        <p class="text-center">
+            {{bookingData.trip.package.packageName}} <br>
+            {{bookingData.trip.package.from}}  to  {{bookingData.trip.package.to}}<br>
+            <b>Pickup Location: </b><br>{{bookingData.pickUpAddress}} <br>
+            <b>Pickup Time: </b> <br>       {{bookingData.pickUpTime | date}}<br>
+          </p>
+          <h4 class="text-center">Rs {{bookingData.trip.package.rate}}</h4>
+          <h5  class="text-center">Payment status: {{bookingData.paymentStatus}}</h5>
+          <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-center">User Details</h6>
+                <p class="text-center">
+                    {{bookingData.trip.user.fullName}} <br>
+                    {{bookingData.trip.user.email}} <br>
+                    {{bookingData.trip.user.mobile}} <br>
+
+                  </p>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-center">Driver Details</h6>
+                <p class="text-center">
+                    {{bookingData.trip.driver.fullName}} <br>
+                    {{bookingData.trip.driver.mobile}} <br>
+                    {{bookingData.trip.driver.email}}<br>
+                    {{bookingData.trip.driver.car}}<br>
+                  </p>
+            </div>
+          </div>
+          <br>
+          <div class="text-center">
+              <button class="btn btn-primary" (click)="goToHome()">Close</button>
+          </div>
+
+      </div>
+    </div>

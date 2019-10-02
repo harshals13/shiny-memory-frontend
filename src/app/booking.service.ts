@@ -64,4 +64,13 @@ export class BookingService {
     return this.http.put(AppConfig.baseUrlV1 + '/trip', data, this.options)
     .pipe();
   }
+
+  submitBookingConfirmation(data): Observable< any > {
+    const responseType = 'json';
+    this.options = {
+      responseType
+    };
+    return this.http.post(AppConfig.baseUrlV1 + '/booking', data, this.options)
+    .pipe();
+  }
 }
